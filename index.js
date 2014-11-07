@@ -2,8 +2,6 @@ var fs = require('fs');
 var vm = require('vm');
 var nodeUtil = require('util');
 
-var self = this;
-
 var Class	= require('./lib/class.js');
 var Utils	= require('./lib/utils.js');
 
