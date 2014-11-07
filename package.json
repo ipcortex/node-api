@@ -1,0 +1,21 @@
+{
+  "name": "ipcortex-pabx",
+  "version": "1.0.0-dev",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ipcortex",
+    "pabx",
+    "pbx",
+    "api"
+  ],
+  "author": "ipcortex",
+  "license": "BSD",
+  "dependencies": {
+    "agentkeepalive": "^0.2.3",
+    "request": "^2.47.0"
+  }
+}
