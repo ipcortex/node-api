@@ -1,6 +1,6 @@
 Node API/Library
 ================
-This module is a wrapper for the [ipcortex PABX API](https://tech.ipcortex.co.uk/api).
+This module is a wrapper for the [ipcortex PABX API](https://tech.ipcortex.co.uk/apioverview).
 
 Installation
 ------------
@@ -23,7 +23,7 @@ Then use the constructor to create an object, with the hostname as the PABX's ho
 ```javascript
 var IPCortex = ipcAPI(hostname, protocol);
 ```
-You can then use the API as you would client-side. See our [documentation](https://tech.ipcortex.co.uk/api) for more info.
+You can then use the API as you would client-side. See our [documentation](https://tech.ipcortex.co.uk/apioverview) for more info.
 
 Example
 -------
