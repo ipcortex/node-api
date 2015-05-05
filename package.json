@@ -15,7 +15,7 @@
   "author": "ipcortex",
   "license": "BSD",
   "dependencies": {
-    "agentkeepalive": "^0.2.3",
-    "request": "^2.47.0"
+    "agentkeepalive": "^2.0.2",
+    "request": "^2.55.0"
   }
 }

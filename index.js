@@ -25,7 +25,16 @@ module.exports = function(locationHost, locationProto) {
 	var IPCortex = {};
 	IPCortex.Utils = Utils;
 	IPCortex.XHR = Utils.XHR;
-	var contextVars = nodeUtil._extend(GLOBAL, {
+	// Add Node's extend function here so we don't rely on undocumented functions...
+	var extender = function(origin, add) {
+		var keys = Object.keys(add);
+		var i = keys.length;
+		while (i--) {
+			origin[keys[i]] = add[keys[i]];
+		}
+		return origin;
+	};
+	var contextVars = extender(GLOBAL, {
 		location:	location,
 		Class:		Class,
 		Utils:		Utils,

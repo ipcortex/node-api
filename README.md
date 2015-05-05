@@ -9,7 +9,13 @@ To install, simply run:
 npm install git@github.com:ipcortex/node-api.git
 ```
 
-However use this module you will need to download api.js from the PABX you are trying to connect against. A script is included (updateAPI.js) to handle this for you - just provide the HTTP host for it download it from. Otherwise, download the file from http://pabx/api/api.js and place it in lib/api.js - where "pabx" is your PABX's hostname.
+However use this module you will need to download api.js from the PABX you are trying to connect against. A script is included (updateAPI.js) to handle this for you - just provide the HTTP host for it download it from. For example:
+
+```
+node updateAPI.js http://pabx
+```
+
+Or you can download the file from http://pabx/api/api.js and place it in lib/api.js - where "pabx" is your PABX's hostname.
 
 After that, you should be ready to include it in your project.
 
