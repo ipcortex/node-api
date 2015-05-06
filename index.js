@@ -49,7 +49,7 @@ module.exports = function(locationHost, locationProto) {
 	});
 	var context = vm.createContext(contextVars);
 	var api = fs.readFileSync(apiFile, 'utf8');
-	vm.runInContext(api, context, apiFile);
+	vm.runInContext(api, context, { filename: apiFile });
 	IPCortex.PBX.Auth.setHost(locationHost);
 	return IPCortex;
 };
