@@ -20,7 +20,6 @@ module.exports = function(locationHost, locationProto) {
 		host: locationHost
 	};
 	if(!fs.existsSync(apiFile)) {
-		console.log(__dirname + '/../../lib/api.js');
 		if(!fs.existsSync(__dirname + '/../../lib/api.js')) {
 			throw new Error('api.js does not exist! (Have you downloaded it using updateAPI.js?)');
 		}
