@@ -16,15 +16,13 @@ var apiFile	= __dirname + '/lib/api.js';
  * @returns {IPCortex}
  */
 module.exports = function(locationHost, locationProto, locationPort) {
+	var locationProto = locationProto || 'http';
 	var location = {
 		protocol: locationProto + ':',
 		host: locationHost
 	};
 	if(locationPort) {
-		location.port = ParseInt(locationPort, 10);
-	}
-	else {
-		location.port = (locationProto == 'https' ? 443 : 80)
+		location.port = parseInt(locationPort, 10);
 	}
 	if(!fs.existsSync(apiFile)) {
 		if(!fs.existsSync(__dirname + '/../../lib/api.js')) {
@@ -56,6 +54,6 @@ module.exports = function(locationHost, locationProto, locationPort) {
 	var context = vm.createContext(contextVars);
 	var api = fs.readFileSync(apiFile, 'utf8');
 	vm.runInContext(api, context, { filename: apiFile });
-	IPCortex.PBX.Auth.setHost(locationHost);
+	IPCortex.PBX.Auth.setHost(locationProto + '://' + locationHost);
 	return IPCortex;
 };
