@@ -12,13 +12,20 @@ var apiFile	= __dirname + '/lib/api.js';
  * software version.
  * @param locationHost {string}
  * @param locationProto {string}
+ * @param locationPort {string}
  * @returns {IPCortex}
  */
-module.exports = function(locationHost, locationProto) {
+module.exports = function(locationHost, locationProto, locationPort) {
 	var location = {
 		protocol: locationProto + ':',
 		host: locationHost
 	};
+	if(locationPort) {
+		location.port = ParseInt(locationPort, 10);
+	}
+	else {
+		location.port = (locationProto == 'https' ? 443 : 80)
+	}
 	if(!fs.existsSync(apiFile)) {
 		if(!fs.existsSync(__dirname + '/../../lib/api.js')) {
 			throw new Error('api.js does not exist! (Have you downloaded it using updateAPI.js?)');
