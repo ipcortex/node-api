@@ -45,7 +45,7 @@ else {
 	console.log('Getting api.js from ' + host);
 	getAPI(host, function(err){
 		if(err) {
-			console.error('Error occured loading api.js!');
+			console.error('Error occurred loading api.js!');
 			return;
 		}
 		console.log('Successfully written api.js');
