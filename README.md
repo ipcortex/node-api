@@ -1,93 +1,58 @@
 Node API/Library
 ================
-This module is a wrapper for the [ipcortex PABX API](https://tech.ipcortex.co.uk/apioverview).
+This module is a wrapper for the [IPCortex Communication System (CS) API](https://developers.ipcortex.co.uk/gs/js).
 
 Installation
 ------------
 To install, simply run:
 ```
-npm install git@github.com:ipcortex/node-api.git
+npm install ipcortex/node-api
 ```
 
-However use this module you will need to download api.js from the PABX you are trying to connect against. A script is included (updateAPI.js) to handle this for you - just provide the HTTP host for it download it from. For example:
+However use this module you will need to download api.js from the IPCortex CS you are trying to connect against. A script is included (updateAPI.js) to handle this for you - just provide the HTTP host for it download it from. For example:
 
 ```
-node updateAPI.js http://pabx
+node updateAPI.js http://pabx.hostname
 ```
 
-Or you can download the file from http://pabx/api/api.js and place it in lib/api.js - where "pabx" is your PABX's hostname.
+Or you can download the file from http://pabx.hostname/api/api.js and place it in lib/api.js - where `pabx.hostname` is your IPCortex CS' hostname.
 
 After that, you should be ready to include it in your project.
 
 Usage
 -----
-To get started after installation, simply require the module as you normally would: 
+To get started after installation, simply require the module as you normally would:
 ```javascript
-var ipcAPI = require('ipcortex-pabx');
+var IPCortex = require('ipcortex-pabx');
 ```
-Then use the constructor to create an object, with the hostname as the PABX's hostname and protocol as 'http' or 'https':
-```javascript
-var IPCortex = ipcAPI(hostname, protocol);
-```
-You can then use the API as you would client-side. See our [documentation](https://tech.ipcortex.co.uk/apioverview) for more info.
+
+You can then use the API as you would client-side. See our [documentation](https://developers.ipcortex.co.uk/gs/js) for more info.
 
 Example
 -------
 ```javascript
-var ipcAPI = require('ipcortex-pabx');
+var IPCortex = require('ipcortex-pabx');
 
-var IPCortex = ipcAPI('10.0.0.1', 'http');
-
-IPCortex.PBX.Auth.login('202t28', '202t28', true, authCB);
-
-function authCB(ok) {
-	if ( ok ) {
-		/* Request the poller starts and initial PABX
-		 * config information is fetched and cached.
-		 * 'go' and 'error' are success/fail callbacks.
-		 * 'error' will be called on any error event.
-		 */
-		IPCortex.PBX.startPoll(go, error);
-	}
-}
-function error(n, m) {
-	console.log('We got an error number: '+n+' Text: '+m);
-}
-function go() {
-	console.log('Realtime feed callback says we\'re going');
-
-	/* Once initialised, request all our owned lines are returned */
-	IPCortex.PBX.getLines(linesCB, true);
-}
-function linesCB(l) {
-	/* Lines are returned in a list - Hook them all */
-	while ( l.length )  {
-		var line = l.shift();
-		var line_id =  line.get('line') ;
-		var line_name = line.get('name');
-
-		/* In this example we allow the line to go out of scope once hooked
-		 * this is OK as a reference is passed with the callback
-		 */
-		line.hook(lineEvent);
-		console.log('Got a line: ' + line_id  + ' (' + line_name + ')');
-	}
-}
-function lineEvent(f, h, l) {
-	console.log('Got an event for line: ' +
-	l.get('line') + ' (' + l.get('name') + ')');
-	/* A useful thing to know about a line is it's call info */
-	var calls = l.get('calls');
-	for ( var x in calls ) {
-		if ( calls[x].get('state') != 'dead' )
-			console.log(calls[x].get('state'));
-	}
-}
+IPCortex.PBX.Auth.setHost('https://pabx.hostname');
+IPCortex.PBX.Auth.login({
+  username: '<username>',
+  password: '<password>'
+}).then(function () {
+	console.log('Login successful');
+	IPCortex.PBX.startFeed().then(function () {
+		console.log('Live data feed started');
+		// Do stuff here
+	}, function () {
+		console.log('Live data feed failed');
+	});
+}, function () {
+	console.log('Login failed');
+});
 ```
 
-Licence
+License
 -------
-Copyright (c) 2014, IP Cortex Ltd.
+Copyright (c) 2016, IP Cortex Ltd.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
