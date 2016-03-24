@@ -17,7 +17,7 @@ function getAPI(host, callback) {
 			return;
 		}
 		try {
-			fs.writeFileSync(__dirname + '/lib/api.js', body);
+			fs.writeFileSync(__dirname + '/api.js', body);
 			//console.log('Successfully written api.js');
 			if(typeof callback == 'function') {
 				callback(null);

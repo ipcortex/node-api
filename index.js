@@ -5,15 +5,15 @@ GLOBAL.XMLHttpRequest = require('xmlhttprequest-cookie').XMLHttpRequest;
 GLOBAL.Promise = require('es6-promise-polyfill').Promise;
 GLOBAL.WebSocket = require('websocket').w3cwebsocket;
 
-var apiFile	= __dirname + '/lib/api.js';
+var apiFile	= __dirname + '/api.js';
 
 module.exports = (function() {
 	if(!fs.existsSync(apiFile)) {
-		if(!fs.existsSync(__dirname + '/../../lib/api.js')) {
+		if(!fs.existsSync(__dirname + '/../../api.js')) {
 			throw new Error('api.js does not exist! (Have you downloaded it using updateAPI.js?)');
 		}
 		else {
-			apiFile = __dirname + '/../../lib/api.js';
+			apiFile = __dirname + '/../../api.js';
 		}
 	}
 	var api = fs.readFileSync(apiFile, 'utf8');
