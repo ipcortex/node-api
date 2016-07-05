@@ -1,9 +1,10 @@
 var fs = require('fs');
 var vm = require('vm');
 
-GLOBAL.XMLHttpRequest = require('xmlhttprequest-cookie').XMLHttpRequest;
-GLOBAL.Promise = require('es6-promise-polyfill').Promise;
-GLOBAL.WebSocket = require('websocket').w3cwebsocket;
+var _global = global || GLOBAL;
+_global.XMLHttpRequest = require('xmlhttprequest-cookie').XMLHttpRequest;
+_global.Promise = require('es6-promise-polyfill').Promise;
+_global.WebSocket = require('websocket').w3cwebsocket;
 
 var apiFile	= __dirname + '/api.js';
 
