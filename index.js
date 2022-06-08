@@ -1,14 +1,20 @@
-var fs = require('fs');
-var vm = require('vm');
+const fs = require('fs');
+const vm = require('vm');
 
-var _global = global || GLOBAL;
-_global.XMLHttpRequest = require('xmlhttprequest-cookie').XMLHttpRequest;
-_global.Promise = require('es6-promise-polyfill').Promise;
-_global.WebSocket = require('websocket').w3cwebsocket;
+const XMLHttpRequest = require('xmlhttprequest-cookie').XMLHttpRequest;
+const WebSocket = require('websocket').w3cwebsocket;
 
 var apiFile	= __dirname + '/api.js';
 
 module.exports = (function() {
+	const context = {
+		XMLHttpRequest,
+		WebSocket,
+		setInterval,
+		setTimeout,
+		clearTimeout,
+		console
+	};
 	if(!fs.existsSync(apiFile)) {
 		if(!fs.existsSync(__dirname + '/../../api.js')) {
 			throw new Error('api.js does not exist! (Have you downloaded it using updateAPI.js?)');
@@ -17,8 +23,11 @@ module.exports = (function() {
 			apiFile = __dirname + '/../../api.js';
 		}
 	}
-	var api = fs.readFileSync(apiFile, 'utf8');
-	vm.runInThisContext(api, { filename: apiFile });
+	const api = fs.readFileSync(apiFile, 'utf8');
+	const script = new vm.Script(api);
+	vm.createContext(context);
+	script.runInContext(context);
+	const IPCortex = context.IPCortex;
 	IPCortex.PBX.httpStopReuse();
 	return IPCortex;
 }());

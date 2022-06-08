@@ -16,7 +16,6 @@
   "license": "BSD",
   "dependencies": {
     "agentkeepalive": "^2.0.2",
-    "es6-promise-polyfill": "^1.2.0",
     "request": "^2.55.0",
     "websocket": "^1.0.22",
     "xmlhttprequest-cookie": "ipcortex/node-xmlhttprequest-cookie"
