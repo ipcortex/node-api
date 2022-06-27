@@ -13,6 +13,7 @@ module.exports = (function() {
 		setInterval,
 		setTimeout,
 		clearTimeout,
+		clearInterval,
 		console
 	};
 	if(!fs.existsSync(apiFile)) {
