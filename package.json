@@ -18,6 +18,6 @@
     "agentkeepalive": "^2.0.2",
     "request": "^2.55.0",
     "websocket": "^1.0.22",
-    "xmlhttprequest-cookie": "https://github.com/ipcortex/node-xmlhttprequest-cookie.git"
+    "xmlhttprequest-cookie": "https://github.com/ipcortex/node-xmlhttprequest-cookie/tarball/master"
   }
 }
